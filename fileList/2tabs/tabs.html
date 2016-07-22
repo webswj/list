@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>选项卡</title>
+	<style type="text/css">
+	*{margin: 0;padding:0;font: 14px 'Microsoft Yahei'}
+	.wrap{
+		width: 300px;
+		height: 500px;
+		margin: 0 auto;
+	}
+	.tab li{
+		float: left;		
+		display: inline-block;
+		width: 50px;
+		height: 20px;
+		margin: 2px;
+		border:1px solid #ccc;
+		cursor: pointer;		
+	}
+	.content:before{
+		content: '.';
+		display: block;
+		height: 0;
+		clear: both;
+		visibility:hidden;
+		overflow:hidden;
+	}
+	.content{
+		margin-top: 5px;
+	}
+	.content p{
+		display: none;
+		height: 100px;
+	}
+	.active{
+		background-color: yellow;
+	}
+	</style>
+	<script type="text/javascript">
+	window.onload = function(){
+		var oUl  = document.getElementById('tab');
+		var oDiv = document.getElementById('content');
+		var oLi  = oUl.getElementsByTagName('li');
+		var oP   = oDiv.getElementsByTagName('p');
+		for(var i =0; i<oLi.length;i++){
+			oLi[i].index = i;
+			oLi[i].onclick = function(){
+				for(var j=0;j<oLi.length;j++){
+					oLi[j].className = '';
+					oP[j].style.display = 'none';
+				}
+				this.className = 'active';
+				oP[this.index].style.display ='block';
+			}
+		}
+	}
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<ul id="tab" class="tab">
+			<li class="active">篮球</li>
+			<li>足球</li>
+			<li>网球</li>
+			<li>乒乓球</li>
+		</ul>
+		<div class="content" id="content">
+			<p style="display:block">
+				篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球篮球
+			</p>
+			<p>
+				足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球足球
+			</p>
+			<p>
+				网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球网球
+			</p>
+			<p>
+				乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓球乒乓
+			</p>
+		</div>
+	</div>	
+</body>
+</html>

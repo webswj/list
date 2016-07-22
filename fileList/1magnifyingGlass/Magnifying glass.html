@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Magnifying glass放大镜</title>
+	<style type="text/css">
+	#div1{
+		position: relative;
+		width: 400px;
+		height: 400px;
+		padding: 5px;
+		border: 1px solid #ccc;
+	}
+	#div1 .smallPic{
+		position: relative;
+		width: 400px;
+		height: 400px;
+		/*overflow: hidden;*/
+	}
+	#div1 .mark_layer{
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 3;
+	}
+	#div1 .float_layer{
+		display: none;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 50px;
+		height: 50px;
+		border: 1px solid #000;
+		background-color: #fff;
+		opacity: 0.3;
+		filter:alpha(opacity:30);
+	}
+	#div1 .smallPic img{
+		display: block;
+		width: 400px;
+		height: 400px;
+	}
+	#div1 .bigPic{
+		display: none;
+		position: absolute;
+		top: 0;
+		left: 415px;
+		width: 600px;
+		height: 600px;
+		overflow: hidden;
+		border: 1px solid #ccc;
+	}
+	#div1 .bigPic img{
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 800px;
+		height: 800px;
+	}
+	</style>
+	<script type="text/javascript">
+		function getByClass(parent,clazz){
+			var aEles   = parent.getElementsByTagName("*");
+			var result = [];
+			for(var i=0;i<aEles.length;i++){
+				if((' '+aEles[i].className+' ').indexOf(' '+clazz+' ') != -1){
+					result.push(aEles[i]);
+				}
+			}
+			return result;
+		}
+		window.onload   = function(){
+			var oDiv    = document.getElementById('div1');
+			var oMark   = getByClass(oDiv,"mark_layer")[0];
+			var oFloat  = getByClass(oDiv,"float_layer")[0];
+			var oBigPic = getByClass(oDiv,"bigPic")[0];
+			var oSmall  = getByClass(oDiv,"smallPic")[0];
+			var oImg    = oBigPic.getElementsByTagName("img")[0];
+			oMark.onmouseover = function(){
+				oFloat.style.display  = "block";
+				oBigPic.style.display = "block";
+			};
+			oMark.onmouseout  = function(){
+				oFloat.style.display  = "none";
+				oBigPic.style.display = "none";				
+			};	
+			oMark.onmousemove = function(ev){
+				var oEvent = ev||event;
+				var l = oEvent.clientX-oDiv.offsetLeft-oSmall.offsetLeft-oFloat.offsetWidth/2;
+				var t = oEvent.clientY-oDiv.offsetTop-oSmall.offsetTop-oFloat.offsetHeight/2;
+				if(l<0){
+					l=0;
+				}else if(l>oMark.offsetWidth-oFloat.offsetWidth){
+					l=oMark.offsetWidth-oFloat.offsetWidth;
+				}
+				if(t<0){
+					t=0;
+				}else if(t>oMark.offsetHeight-oFloat.offsetHeight){
+					t=oMark.offsetHeight-oFloat.offsetHeight;
+				}
+				oFloat.style.left = l + "px";
+				oFloat.style.top  = t + "px";
+				var precentX = l/(oMark.offsetWidth-oFloat.offsetWidth);
+				var precentY = t/(oMark.offsetHeight-oFloat.offsetHeight);
+				oImg.style.left = -(oImg.offsetWidth-oBigPic.offsetWidth)*precentX+"px";
+				oImg.style.top = -(oImg.offsetHeight-oBigPic.offsetHeight)*precentY+"px";
+			};		
+		};
+	</script>
+</head>
+<body>
+	<div id="div1">
+		<div class="smallPic">
+			<span class="mark_layer"></span>
+			<span class="float_layer"></span>
+			<img src="small.jpg" alt="">			
+		</div>
+		<div class="bigPic">
+			<img src="big.jpg" alt="">
+		</div>
+	</div>
+</body>
+</html>

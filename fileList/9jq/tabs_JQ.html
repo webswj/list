@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JQ选项卡</title>
+	<style type="text/css">
+	#div1{
+		width: 400px;
+		height: 400px;
+		margin: 20px auto;
+		background-color: #ccc;
+	}
+	#div1 button{
+		width: 60px;
+	}
+	#div1 div{
+		display: none;
+		margin: 10px;
+		font-size: 38px;
+	}
+	.active{
+		background-color: yellow;
+	}
+	</style>
+	<script type="text/javascript" src="jquery-3.0.0.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$('#div1').find('button').click(function(){
+			$('#div1').find('button').attr('class','')
+			$('#div1').find('div').css('display','none');			
+			$(this).attr('class','active');
+			$('#div1').find('div').eq($(this).index()).css('display','block');	
+		});
+	});
+	</script>
+</head>
+<body>
+	<div id="div1">
+		<button class="active">html</button>
+		<button>css</button>
+		<button>js</button>
+		<div style ="display:block">
+			<p>html html html html html html html html html html html html html html html html html html html html html html html html </p>
+		</div>
+		<div>
+			<p>css css css css css css css css css css css css css css css css css css css css </p>
+		</div>
+		<div>
+			<p>javaScript javaScript javaScript javaScript javaScript javaScript javaScript </p>
+		</div>
+	</div>
+</body>
+</html>

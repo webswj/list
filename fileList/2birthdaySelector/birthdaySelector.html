@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生日选择器</title>
+<script>
+       function addEvent(node,event,handler){
+           if (!!node.addEventListener){
+               node.addEventListener(event,handler,!1);
+           }else{
+               node.attachEvent('on'+event,handler);
+           }
+       }
+</script>
+</head>
+<body>
+    <select name="year" id="year">
+        <option value="0">--</option>
+        <option value="1999">1999</option>
+        <option value="2000">2000</option>
+        <option value="2001">2001</option>
+        <option value="2001">2002</option>
+        <option value="2001">2003</option>
+        <option value="2001">2004</option>
+        <option value="2001">2005</option>
+        <option value="2001">2006</option>
+    </select>年
+    <select name="month" id="month">
+        <option value="0">--</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+    </select>月
+    <select name="date" id="date">
+        <option value="0">--</option>
+    </select>日
+    <script type="text/javascript">
+// 现需求如下：
+//     “年”或“月”发生变化且为有效值时，“日”下拉选择框显示相应的项。
+//     “年”下拉选择框为初始状态（即值为0）时， “月”、“日”下拉选择框一定为初始状态（即值为0）。
+//     “月”下拉选择框为初始状态（即值为0）时， “日”下拉选择框一定为初始状态（即值为0）。
+// 请写出以上需求的实现代码，要求浏览器兼容。
+    var selectyear = document.getElementById('year');
+    var selectmonth = document.getElementById('month');
+    var selectdate = document.getElementById('date');
+    //getdat函数根据选择的年月获取对应的天数
+    function getdat(selectyear,selectmonth){
+        //根据选择的年、月创建一个日期
+        var date = new Date(selectyear.value,selectmonth.value,0);
+        //add函数给10以前的数字前面加0
+        function add(m){
+            return (m<10)?'0'+m:''+m;
+        }
+        var date_value = date.getDate();//获取天数
+        var date_array = [];//用于储存当月所有的日
+        //使用ffor循环向数组添加选择月份中所有的日
+        for (var i = 1; i <= date_value; i++) {
+            date_array.push(add(i));
+        };
+        return date_array;
+    }
+    //填充date
+    function add_Select(select_value,list){ 
+        //清除选项菜单到初始状态       
+            for(var i=select_value.length-1;i>0;i--){ 
+                select_value.remove(i); 
+            }
+        //判断年、月选项是否是有效值并添加对应的日期的‘日’选项   
+        if(selectyear.value !=0 && selectmonth.value !=0){  
+            for(var i=0,l=list.length,data;i<l;i++){
+                data = list[i];
+                var option = new Option(data); 
+                select_value.add(option); 
+            }
+        }
+    }   
+
+    // 监听年选项切换并通过执行add_Select函数添加相应选择项
+    addEvent(
+        selectyear,
+        'change',function(event){
+            var list = getdat(selectyear,selectmonth);             
+            add_Select(selectdate,list); 
+        }
+    );  
+    // 监听月选项切换并通过执行add_Select函数添加相应选择项
+    addEvent(
+        selectmonth,
+        'change',function(event){
+            var list = getdat(selectyear,selectmonth);             
+            add_Select(selectdate,list); 
+        }
+    );
+    </script>
+</body>
+</html>

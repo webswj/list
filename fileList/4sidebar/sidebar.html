@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>分享到侧边栏</title>
+	<style type="text/css">
+	.div1{
+		position: absolute;
+		width: 150px;
+		height: 200px;
+		left:-150px;
+		top:0;
+		background-color: green;
+	}
+	.div1 span{
+		position: absolute;
+		width: 30px;
+		right: -30px;
+		top:80px;
+		background-color: yellow;
+	}
+	</style>
+	<script type="text/javascript">
+	window.onload        = function(){
+		var oDiv         = document.getElementById('div1');
+		oDiv.onmouseover = function(){
+			move(0);
+		}
+		oDiv.onmouseout  = function(){
+			move(-150);
+		}
+	}
+	var timer = null;
+	function move(iTarget){
+		var oDiv  = document.getElementById('div1');
+		clearInterval(timer);
+		timer     = setInterval(function(){		
+			var left  = oDiv.offsetLeft;	
+			var speed = left > iTarget?-10:10;
+			if(left == iTarget){
+				clearInterval(timer);
+			}else{
+				oDiv.style.left = left + speed +'px';
+			}	
+		},30);
+	}
+	</script>
+</head>
+<body>
+	<div class="div1" id="div1">
+		<span>分享到</span>
+	</div>
+</body>
+</html>

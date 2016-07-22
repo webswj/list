@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JQ拖拽</title>
+	<style type="text/css">
+	div{position:absolute;width: 300px;height: 300px;background-color: red;cursor:move;}
+	</style>
+	<script type="text/javascript" src="jquery-3.0.0.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		var disX = 0,
+			disY = 0 ;
+		$('div').mousedown(function(ev){
+			disX = ev.pageX - $(this).offset().left;
+			disY = ev.pageY - $(this).offset().top;
+
+			$(document).mousemove(function(ev){
+				var l = ev.pageX - disX,
+					t = ev.pageY - disY;
+				if(l<0){
+					l = 0;
+				}else if(l >$(document).outerWidth() - $('div').outerWidth()){
+					l = $(document).outerWidth() - $('div').outerWidth();
+				}
+				if(t<0){
+					t = 0;
+				}else if(t >$(document).outerHeight() - $('div').outerHeight()){
+					t = $(document).outerHeight() - $('div').outerHeight();
+				}
+				$('div').css('left',l);
+				$('div').css('top',t);
+			});
+
+			$(document).mouseup(function(){
+				$(document).off();
+			});
+		return false;
+		});	
+	});
+	</script>
+</head>
+<body>
+	<div></div>
+</body>
+</html>

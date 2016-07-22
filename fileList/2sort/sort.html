@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascript-排序</title>
+	<script type="text/javascript">
+	window.onload = function(){
+		var oBtn       = document.getElementById('btn1');
+		var oUl        = document.getElementById('ul1');
+
+		oBtn.onclick   = function(){
+			var oLi    	   = oUl.getElementsByTagName('li');
+			var arr    = [];
+			function Sort(a,b){
+				return parseInt(a.innerHTML)-parseInt(b.innerHTML);
+			}			
+			for(var i=0;i<oLi.length;i++){
+				arr[i] = oLi[i];
+			}			
+			arr.sort(Sort);
+			console.log(arr);
+			for(var i=0;i<arr.length;i++){
+				oUl.appendChild(arr[i]);
+			}			
+		};
+	}
+
+	</script>
+</head>
+<body>
+	<input id='btn1' type="button" value="排序">
+	<ul id = 'ul1'>
+		<li>56</li>
+		<li>23</li>
+		<li>43</li>
+		<li>3</li>
+		<li>12</li>
+		<li>44</li>
+		<li>556</li>
+		<li>998</li>
+		<li>5555</li>
+		<li>28</li>
+	</ul>
+</body>
+</html>

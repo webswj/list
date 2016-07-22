@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>不能出指定对象的拖拽</title>
+	<style type="text/css">
+	#div1{
+		position: absolute;
+		width: 100px;
+		height: 100px;
+		background-color: red;
+		cursor: move;
+	}
+	#div2{
+		position: relative;
+		width: 400px;
+		height: 400px;
+		background-color: #ccc;
+	}
+	</style>
+	<script type="text/javascript">
+	window.onload = function(){
+		var oDiv  = document.getElementById('div1');
+		var oDiv2 = document.getElementById('div2');
+		var posX  = 0;
+		var posY  = 0;
+		oDiv.onmousedown = function(ev){
+			var ev = ev||event;
+			posX   = ev.clientX - this.offsetLeft;
+			posY   = ev.clientY - this.offsetTop;
+			document.onmousemove = function(ev){
+				var ev = ev||event;
+				var l  = ev.clientX - posX ;
+				var t  = ev.clientY - posY ;
+				if(l<0){
+					l = 0;
+				}else if(l > oDiv2.offsetWidth - oDiv.offsetWidth){
+					l = oDiv2.offsetWidth - oDiv.offsetWidth;				}
+				if(t<0){
+					t = 0;
+				}else if(t >oDiv2.offsetHeight - oDiv.offsetHeight){
+					t = oDiv2.offsetHeight - oDiv.offsetHeight;
+				}
+				oDiv.style.left = l +'px';
+				oDiv.style.top  = t + 'px';
+
+			};
+			document.onmouseup = function(){
+				this.onmousemove = null;
+				this.onmouseup   = null;
+			}
+		};
+		
+	}
+	</script>
+</head>
+<body>
+	<div id="div2">
+		<div id="div1"></div>
+	</div>	
+</body>
+</html>

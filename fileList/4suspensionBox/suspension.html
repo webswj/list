@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>右侧悬浮框</title>
+	<style type="text/css">
+	*{margin: 0;padding: 0;}
+	#div1{
+		position:absolute;
+		width: 50px;
+		height: 160px;
+		right:0;
+		bottom:0;
+		background-color: red;
+	}
+	#txt{
+		position: fixed;
+		right: 0;
+		top:0;
+	}
+	</style>
+	<script type="text/javascript">
+	window.onscroll   = function(){
+		var oDiv      = document.getElementById('div1');
+		var scrolltop = document.documentElement.scroolTop||document.body.scrollTop;
+		// oDiv.style.top= (document.documentElement.clientHeight-oDiv.offsetHeight)+scrolltop+'px';
+		move((document.documentElement.clientHeight-oDiv.offsetHeight)/2+scrolltop);
+	}
+	var timer = null;
+	function move(iTarget){
+		var oDiv      = document.getElementById('div1');
+		document.title= iTarget; 
+		clearInterval(timer);
+		timer         = setInterval(function(){
+			var top   = oDiv.offsetTop;
+			var val   = (iTarget-top)/4;
+			var speed = val>0?Math.ceil(val):Math.floor(val);
+			if(top == iTarget){
+				clearInterval(timer);
+			}else{
+				document.getElementById('txt').value = oDiv.offsetTop;
+				oDiv.style.top = top +speed+'px';
+			}
+		},30);
+	}
+	</script>
+</head>
+<body style ="height:2000px;">
+	<div id="div1"></div>
+	<input id ='txt'>
+</body>
+</html>

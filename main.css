@@ -1,0 +1,130 @@
+@charset "utf-8";
+/* 史文俊作品列表 */
+/* reset */
+html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu {
+margin:0;
+padding:0;
+}
+
+table {
+border-collapse:collapse;
+border-spacing:0;
+}
+
+caption,th {
+font-weight:400;
+text-align:left;
+}
+
+html,body,fieldset,img,iframe,abbr {
+border:0;
+}
+
+i,cite,em,var,address,dfn {
+font-style:normal;
+}
+
+label,summary {
+cursor:default;
+outline:0;
+}
+
+li {
+list-style:none;
+}
+
+h1,h2,h3,h4,h5,h6,small {
+font-size:100%;
+}
+
+sup,sub {
+font-size:83%;
+}
+
+pre,code,kbd,samp {
+font-family:inherit;
+}
+
+q:before,q:after {
+content:none;
+}
+
+textarea {
+overflow:auto;
+resize:none;
+}
+
+h1,h2,h3,h4,h5,h6,em,strong,b {
+font-weight:700;
+}
+
+del,ins,u,s,a,a:hover {
+text-decoration:none;
+}
+
+header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details,{
+display:block;
+}
+
+a,li,button{
+cursor:pointer;
+}
+
+li:hover{
+background-color:#05A6E0;
+}
+
+body,textarea,input,button,select,keygen,legend,a {
+color:#FFF;
+font:14px/1.14 'Microsoft YaHei';
+outline:0;
+}
+
+a {
+color:#333;
+}
+
+.f_cl:after {
+clear:both;
+content:'.';
+display:block;
+height:0;
+overflow:hidden;
+visibility:hidden;
+}
+
+.f_cl{
+zoom:1;
+}
+/* reset */
+
+.g_wrap{
+	width: 300px;
+	background-color: #11456B;
+	margin: 20px auto;
+}
+
+.g_wrap h2{
+	text-align: center;
+	font-size: 30px;
+	margin-bottom: 10px;
+}
+.g_wrap p{
+	font-size: 18px;
+	line-height: 20px;
+	padding: 6px 0;
+}
+.g_nav li{
+	padding: 4px 2px;
+	border: 1px solid #ccc;
+	margin-bottom: -1px;
+}
+.g_nav li ul li:hover{
+	background-color: #008000;
+}
+.g_nav a{
+	display: inline-block;
+	width: 100%;
+	line-height: 22px;	
+	color: #fff;
+}

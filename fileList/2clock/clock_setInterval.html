@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>setInterval应用-时钟</title>
+	<style type="text/css">
+	*{margin: 0;padding: 0;}
+	.clock{
+		width: 500px;
+		height: 160px;
+		margin: 20px auto;
+		text-align: center;		
+		font: 18px 'Microsoft Yahei';
+		border:1px solid #ccc;
+		background-color: black;		
+		color: white;
+	}
+	.clock h1{
+		margin: 20px;
+	}
+	</style>
+	<script type="text/javascript">
+	window.onload = function(){
+		var oClock = document.getElementById('clock');
+		function addZ(num){
+			return num<10?'0'+num:''+num;
+		}
+		function clock(){
+			var date   = new Date();
+			var year   = date.getFullYear();
+			var month  = date.getMonth()+1;
+			var today  = date.getDate();
+			var hour   = date.getHours();
+			var minute = date.getMinutes();
+			var second = date.getSeconds();			
+			oClock.innerHTML = '<h1>'+year+'年'+addZ(month)+'月'+addZ(today)+'日</h1><p>'+addZ(hour)+'时'+addZ(minute)+'分'+addZ(second)+'秒</p>';
+		}
+		setInterval(clock,1000);
+		clock();
+	}
+	</script>
+</head>
+<body>
+	<div id="clock" class="clock"></div>
+</body>
+</html>
