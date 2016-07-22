@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>淡入淡出</title>
+	<style type="text/css">
+	#img1{
+		opacity:0.3;
+		filter:alpha(opacity=30);
+	}
+	</style>
+	<script type="text/javascript">
+	window.onload = function(){
+		var oImg  = document.getElementById('img1');
+		oImg.onmouseover = function(){
+			change(100);
+			// change(1);
+		}
+		oImg.onmouseout  = function(){
+			change(30);
+			// change(0.3);
+		}
+	}
+	var timer = null;
+	var val   = 30;
+	// var val  = 0.3;
+	function change(iTarget){
+		var oImg      = document.getElementById('img1');
+		clearInterval(timer);
+		timer         = setInterval(function(){
+			var speed = val >iTarget?-10:10;
+			// var speed = val >iTarget ? -0.1 :0.1 ;
+			if(val == iTarget){
+				clearInterval(timer);
+			}else{
+				val += speed;	
+				oImg.style.opacity = val/100;
+				oImg.style.filter  = 'alpha(opacity='+val+')';
+				// oImg.style.opacity = val;
+				// oImg.style.filter  = 'alpha(opacity='+(val*100)+')';
+			} 
+		},30);
+	}
+	</script>
+</head>
+<body>
+	<img src="pic3.png" id ='img1'>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>无缝滚动</title>
+	<style type="text/css">
+	*{margin: 0;padding: 0;}
+	.wrap{
+		position: relative;
+		width: 1300px;
+		height: 220px;
+		margin: 60px auto;
+		overflow: hidden;
+	}
+	.wrap ul{
+		position: absolute;
+		top:0;
+		left:0;
+
+	}
+	.wrap li{
+		float: left;
+		width: 320px;
+		height: 220px;
+		list-style-type: none;		
+	}
+	</style>
+	<script type="text/javascript">
+	window.onload = function(){
+		var oDiv         = document.getElementById('wrap');
+		var oPic  		 = document.getElementById('pic');
+		var oLi   		 = oPic.getElementsByTagName('li'); 
+		var oA           = document.getElementsByTagName('a');   
+		var timer 		 = null;
+		var speed        = 4 ;
+		oPic.innerHTML 	+= oPic.innerHTML;
+		oPic.style.width = oLi[0].offsetWidth*oLi.length+'px';
+		function move(){
+			if(oPic.offsetLeft < -oPic.offsetWidth/2){
+				oPic.style.left = '0';
+			}else if(oPic.offsetLeft > 0){
+				oPic.style.left = -oPic.offsetWidth/2+'px';
+			}else{
+				oPic.style.left = oPic.offsetLeft+speed+'px';
+			}
+		}
+		timer = setInterval(move,30);
+
+		oDiv.onmouseover = function(){
+			clearInterval(timer);
+		}
+		oDiv.onmouseout  = function(){
+			timer = setInterval(move,30);
+		}
+		oA[0].onclick = function(){
+			speed=-4;
+		}
+		oA[1].onclick = function(){
+			speed=4;
+		}		
+	}
+	</script>
+</head>
+<body>
+	<a href="javascript:">向左动</a>
+	<a href="javascript:">向右动</a>
+	<div class="wrap" id="wrap">
+		<ul class="pic" id="pic">
+			<li><img src="img/pic1.png" alt="pic"></li>
+			<li><img src="img/pic2.png" alt="pic"></li>
+			<li><img src="img/pic3.png" alt="pic"></li>
+			<li><img src="img/pic4.png" alt="pic"></li>
+			<li><img src="img/pic5.png" alt="pic"></li>
+		</ul>
+	</div>
+</body>
+</html>

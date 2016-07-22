@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>简易日历</title>
+	<style type="text/css">
+	*{margin: 0;padding:0;}
+	body{background-color: #999;}
+	.wrap{
+		width: 186px;
+		margin: 10px auto;
+	}
+	.wrap div{
+		float: left;
+		width: 60px;
+		height: 60px;
+		font-size: 20px;
+		cursor: pointer;
+		border:1px solid white;
+		background-color: black;
+		color: white;
+	}
+	.wrap:after{
+		content: '.';
+		display: block;
+		height: 0;
+		clear: both;
+		visibility:hidden;
+		overflow: hidden;
+	}
+	.content{
+		width: 300px;
+		height: 50px;
+		margin: 10px auto;
+		background-color: yellow;
+		color: red;
+	}
+	.wrap .active{
+		background-color: white;
+		color: red;
+	}
+	</style>
+	<script type="text/javascript">
+	window.onload = function(){
+			var oWrap    = document.getElementById('wrap');
+			var oContent = document.getElementById('content');
+			var oDiv     = oWrap.getElementsByTagName('div');
+			for (var i = 0; i < oDiv.length; i++) {
+				oDiv[i].index   = i;
+				oDiv[i].onclick = function(){
+					for (var j = 0; j < oDiv.length; j++) {
+						oDiv[j].className = '';
+					};
+					this.className     = 'active';
+					oContent.innerHTML = '<p>第'+(this.index+1)+'月份活动活动活动活动活动活动活动活动活动活动活动活动活动活动</p>';
+				}
+			};
+	}		
+	</script>
+</head>
+<body>
+	<div class="wrap" id="wrap">
+		<div class='active'>1月</div>
+		<div>2月</div>
+		<div>3月</div>
+		<div>4月</div>
+		<div>5月</div>
+		<div>6月</div>
+		<div>7月</div>
+		<div>8月</div>
+		<div>9月</div>
+		<div>10月</div>
+		<div>11月</div>
+		<div>12月</div>
+	</div>
+	<div class="content" id="content">
+		<p>
+			第1月份活动活动活动活动活动活动活动活动活动活动活动活动活动活动
+		</p>
+	</div>
+</body>
+</html>

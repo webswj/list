@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>仿QQ头像信息框延时效果</title>
+	<style type="text/css">
+	.qq{
+		position: absolute;
+		width: 60px;
+		height: 60px;
+		right: 0;
+		top:0;
+		background-color: yellow;
+	}
+	.txt{
+		position: absolute;
+		width: 200px;
+		height: 200px;
+		right: 60px;
+		top:0;
+		display: none;
+		background-color: green;
+	}
+	</style>
+	<script type="text/javascript">
+	window.onload = function(){
+		var qq          = document.getElementById('qq');
+		var txt 		= document.getElementById('txt');
+		var timer 		= null;
+		function change(v){
+			return timer=setTimeout(function(){
+				txt.style.display = v;
+			},500);			
+		}
+		qq.onmouseover = txt.onmouseover = function(){
+			clearTimeout(timer);			
+			change('block');
+		}
+		qq.onmouseout = txt.onmouseout = function(){
+			change('none');		
+		}
+
+	}
+	</script>
+</head>
+<body>
+	<div id="qq" class="qq">
+	qq头像图标
+	</div>
+	<div id="txt" class="txt" >
+		<p>qq用户信息</p>
+		<p>qq用户信息</p>
+		<p>qq用户信息</p>
+		<p>qq用户信息</p>
+	</div>
+</body>
+</html>

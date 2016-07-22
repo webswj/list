@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>能新增删除+搜素的表单</title>
+	<script type="text/javascript">
+	window.onload = function(){
+		var table = document.getElementById('tab');
+		var oBtn = document.getElementsByTagName('button')[0];
+		oBtn.onclick = function (){
+						var table    = document.getElementById('tab');
+						var oInput   = document.getElementsByTagName('input');
+						var id       = table.tBodies[0].rows.length+1;
+						var tr       = document.createElement('tr');
+						var td       = document.createElement('td');
+						td.innerHTML = id;
+						tr.appendChild(td);
+						var td1      = document.createElement('td');
+						td1.innerHTML= oInput[0].value;
+						tr.appendChild(td1);	
+						var td2      = document.createElement('td');
+						td2.innerHTML= oInput[1].value;
+						tr.appendChild(td2);	
+						var td3      = document.createElement('td');
+						td3.innerHTML= oInput[2].value;
+						tr.appendChild(td3);
+						var td4      = document.createElement('td'); 
+						td4.innerHTML='<a href="javascript:">删除</a>';
+						tr.appendChild(td4);
+						table.tBodies[0].appendChild(tr);	
+
+						var oAs = table.getElementsByTagName('a');
+						for (var i = 0; i < oAs.length; i++) {
+							oAs[i].onclick = function(){
+							var elm = this.parentNode.parentNode;
+							this.parentNode.parentNode.parentNode.removeChild(elm);
+							};
+						}			
+					};	
+		var oAs = table.getElementsByTagName('a');
+		for (var i = 0; i < oAs.length; i++) {
+			oAs[i].onclick = function(){
+			var elm = this.parentNode.parentNode;
+			this.parentNode.parentNode.parentNode.removeChild(elm);
+			};
+		}					
+		//搜索
+		var oBtn_s = document.getElementById('serch');
+		oBtn_s.onclick   = function(){
+			var oInput_s = document.getElementById('sInput');
+			var text     = oInput_s.value;
+			var oLen   = table.tBodies[0].rows;
+			for (var i = 0; i < oLen.length; i++) {
+				oLen[i].style.backgroundColor = '' ;
+				var oCells= oLen[i].cells;
+				for(var j =0;j<oCells.length;j++){ 
+					if(oCells[j].innerHTML == text){
+						oCells[j].parentNode.style.backgroundColor = 'yellow';
+					}				
+					
+				}
+		
+			};
+		}
+	}
+	</script>
+</head>
+<body>
+	姓名<input type="text">
+	性别<input type="text">
+	年龄<input type="text">
+	<button >添加</button>
+	<p><input type='text' id='sInput'><button id='serch'>搜索</button></p>
+	<table id="tab" border='1px;'width="500px" >
+		<caption>表单练习</caption>
+		<thead>
+			<tr><th>ID</th><th>姓名</th><th>性别</th><th>年龄</th></tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>张三</td>
+				<td>男</td>
+				<td>22</td>
+				<td><a href="javascript:">删除</a></td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>李四</td>
+				<td>男</td>
+				<td>28</td>
+				<td><a href="javascript:">删除</a></td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>Aim</td>
+				<td>女</td>
+				<td>25</td>
+				<td><a href="javascript:">删除</a></td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>王五</td>
+				<td>男</td>
+				<td>18</td>
+				<td><a href="javascript:">删除</a></td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>莉莉</td>
+				<td>女</td>
+				<td>30</td>
+				<td><a href="javascript:">删除</a></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

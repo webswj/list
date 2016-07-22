@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>自定义滚动条</title>
+		<style type="text/css">
+			#parent{
+				position: relative;
+				width:600px;
+				height: 20px;
+				margin: 30px auto;
+				background-color: #CCC;
+			}
+			#div1{
+				position:absolute;
+				left: 0;
+				top:0;
+				width:30px;
+				height: 20px;
+				background-color: red;
+				cursor: pointer;
+			}
+			#div2{
+				position:relative;
+				width:400px;
+				height: 400px;
+				margin: 20px auto;
+				border:1px solid black;
+				overflow:hidden;
+			}
+			#div3{
+				position:absolute;
+				left:0;
+				top:0;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var oParent = document.getElementById('parent');
+				var oDiv1   = document.getElementById('div1');
+				var oDiv2   = document.getElementById('div2');
+				var oDiv3   = document.getElementById('div3');				
+				var posx = 0;
+					oDiv1.onmousedown = function(ev){
+						var ev   = ev||event;
+						posx     = ev.clientX - oDiv1.offsetLeft;
+						document.onmousemove = function(ev){
+							var ev = ev||event;
+							var l = ev.clientX -posx;
+							if(l<0){
+								l = 0;
+							}else if(l > oParent.offsetWidth - oDiv1.offsetWidth){
+								l=oParent.offsetWidth - oDiv1.offsetWidth;
+							}
+							oDiv1.style.left = l + 'px';
+							var scale = l/(oParent.offsetWidth - oDiv1.offsetWidth);
+							oDiv3.style.top = -(oDiv3.offsetHeight-oDiv2.offsetHeight)*scale +'px';
+						};
+						document.onmouseup = function(){
+							this.onmousemove = null;
+							this.onmouseup   = null;
+						}
+					};					
+			};
+		</script>
+	</head>
+	<body>
+		<div id="parent">
+			<div id="div1"></div>
+		</div>
+		<div id="div2">
+			<div id="div3">
+				<p>
+在这个例子中，左边的花括号（{）表示对象字面量的开始，因为它出现在了表达式上下文
+（expression context）中。ECMAScript 中的表达式上下文指的是能够返回一个值（表达式）。赋值操作
+符表示后面是一个值，所以左花括号在这里表示一个表达式的开始。同样的花括号，如果出现在一个
+语句上下文（statement context）中，例如跟在if 语句条件的后面，则表示一个语句块的开始。
+然后，我们定义了name 属性，之后是一个冒号，再后面是这个属性的值。在对象字面量中，使用
+逗号来分隔不同的属性，因此"Nicholas"后面是一个逗号。但是，在age 属性的值29 的后面不能添
+加逗号，因为age 是这个对象的最后一个属性。在最后一个属性后面添加逗号，会在IE7 及更早版本和
+Opera 中导致错误。
+在使用对象字面量语法时，属性名也可以使用字符串，如下面这个例子所示。
+var person = {
+"name" : "Nicholas",
+"age" : 29,
+5 : true
+};
+这个例子会创建一个对象，包含三个属性：name、age 和5。但这里的数值属性名会自动转换为字
+符串。
+另外，使用对象字面量语法时，如果留空其花括号，则可以定义只包含默认属性和方法的对象，如
+下所示：
+var person = {}; //与new Object()相同
+person.name = "Nicholas";
+person.age = 29;
+这个例子与本节前面的例子是等价的，只不过看起来似乎有点奇怪。关于对象字面量语法，我们推
+荐只在考虑对象属性名的可读性时使用。
+Array 类型
+除了Object 之外，Array 类型恐怕是ECMAScript 中最常用的类型了。而且，ECMAScript 中
+的数组与其他多数语言中的数组有着相当大的区别。虽然ECMAScript 数组与其他语言中的数组都是
+数据的有序列表，但与其他语言不同的是，ECMAScript 数组的每一项可以保存任何类型的数据。也
+就是说，可以用数组的第一个位置来保存字符串，用第二位置来保存数值，用第三个位置来保存对象，
+以此类推。而且，ECMAScript 数组的大小是可以动态调整的，即可以随着数据的添加自动增长以容
+纳新增数据。
+创建数组的基本方式有两种。第一种是使用Array 构造函数，如下面的代码所示。
+var colors = new Array();
+如果预先知道数组要保存的项目数量，也可以给构造函数传递该数量，而该数量会自动变成length
+属性的值。例如，下面的代码将创建length 值为20 的数组。
+var colors = new Array(20);
+也可以向Array 构造函数传递数组中应该包含的项。以下代码创建了一个包含3 个字符串值的数组：
+var colors = new Array("red", "blue", "green");
+当然，给构造函数传递一个值也可以创建数组。但这时候问题就复杂一点了，因为如果传递的是数
+值，则会按照该数值创建包含给定项数的数组；而如果传递的是其他类型的参数，则会创建包含那个值
+的只有一项的数组。下面就两个例子：
+var colors = new Array(3); // 创建一个包含3 项的数组
+var names = new Array("Greg"); // 创建一个包含1 项，即字符串"Greg"的数组
+ArrayTypeExample01.htm
+另外，在使用Array 构造函数时也可以省略new 操作符。如下面的例子所示，省略new 操作符的
+结果相同：
+var colors = Array(3); // 创建一个包含3 项的数组
+var names = Array("Greg"); // 创建一个包含1 项，即字符串"Greg"的数组
+创建数组的第二种基本方式是使用数组字面量表示法。数组字面量由一对包含数组项的方括号表
+示，多个数组项之间以逗号隔开，如下所示：
+var colors = ["red", "blue", "green"]; // 创建一个包含3 个字符串的数组
+var names = []; // 创建一个空数组
+var values = [1,2,]; // 不要这样！这样会创建一个包含2 或3 项的数组
+var options = [,,,,,]; // 不要这样！这样会创建一个包含5 或6 项的数组
+ArrayTypeExample02.htm
+以上代码的第一行创建了一个包含3个字符串的数组。第二行使用一对空方括号创建了一个空数组。
+第三行展示了在数组字面量的最后一项添加逗号的结果：在IE 中，values 会成为一个包含3 个项且每
+项的值分别为1、2 和undefined 的数组；在其他浏览器中，values 会成为一个包含2 项且值分别为
+1 和2 的数组。原因是IE8 及之前版本中的ECMAScript 实现在数组字面量方面存在bug。由于这个bug
+</p>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单搜索</title>
+	<script type="text/javascript">
+	window.onload = function(){
+		var oTab      = document.getElementById('tab');
+		var oInput    = document.getElementById('sInput');
+		var oBtn      = document.getElementById('search');
+		oBtn.onclick  = function(){
+			var oRow  = oTab.tBodies[0].rows;			
+			for (var i = 0; i < oRow.length; i++) {
+				var text  = oInput.value;
+					text  = text.toLowerCase();
+				var aText = text.split(' ');	
+				var cell  = oRow[i].cells[1].innerHTML.toLowerCase();
+				oRow[i].style.backgroundColor = '';
+				oRow[i].style.display         = 'none';
+				for(var j=0; j<aText.length;j++){
+					if(cell.search(aText[j]) != -1 ){
+						oRow[i].style.backgroundColor = 'yellow';
+						oRow[i].style.display		  = 'table';
+					}
+				}
+			};
+		}
+	}
+	</script>
+</head>
+<body>
+	<p>按姓名搜索<input type='text' id='sInput'><button id='search'>搜索</button></p>
+	<table id="tab" border='1px;'width="500px" >
+		<caption>表单练习</caption>
+		<thead>
+			<tr><th>ID</th><th>姓名</th><th>性别</th><th>年龄</th></tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>张三</td>
+				<td>男</td>
+				<td>22</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>李四</td>
+				<td>男</td>
+				<td>28</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>Aim</td>
+				<td>女</td>
+				<td>25</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>王五</td>
+				<td>男</td>
+				<td>18</td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>莉莉</td>
+				<td>女</td>
+				<td>30</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JQ选项卡</title>
+	<style type="text/css">
+	#div1{
+		width: 400px;
+		height: 200px;
+		margin: 20px auto;
+		background-color: #ccc;
+	}
+	#div1 div{
+		display: none;
+		margin: 10px;
+		font-size: 38px;
+	}
+	.active{
+		background-color: yellow;
+	}
+	</style>
+	<script type="text/javascript" src="jquery-3.0.0.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$('#div1').find('button').click(function(){
+			$('#div1').find('button').attr('class','')
+			$('#div1').find('div').css('display','none');			
+			$(this).attr('class','active');
+			$('#div1').find('div').eq($(this).index()).css('display','block');	
+		});
+	});
+	</script>
+</head>
+<body>
+	<div id="div1">
+		<button class="active">1</button>
+		<button>2</button>
+		<button>3</button>
+		<div style ="display:block">11111111111111111</div>
+		<div>22222222222222222</div>
+		<div>33333333333333333333</div>
+	</div>
+</body>
+</html>
