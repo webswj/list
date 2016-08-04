@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>购物车</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap3/css/bootstrap.min.css">
+</head>
+<body>
+<div ng-controller="cartCtrl" class="container" >
+	<table class="table">
+		<caption><h2>商品列表</h2></caption>
+		<thead>
+			<tr>
+				<th>商品编号</th>
+				<th>产品名称</th>
+				<th>产品单价</th>
+				<th>购买数量</th>
+				<th>添加到购物车</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="a in list">
+				<td ng-bind="a.id"></td>
+				<td ng-bind="a.name"></td>
+				<td ng-bind="a.price"></td>				
+				<td>
+					<input type="number" ng-model="a.quantity">	
+				</td>
+				<td><button type="button" class="btn btn-success" ng-click="addTo(a.id)">添加</button></td>
+			</tr>
+		</tbody>
+	</table>
+	<table class="table" ng-show="cart.length>0">
+		<caption><h2>购物车</h2></caption>
+		<thead>
+			<tr>
+				<th>产品编号</th>
+				<th>产品名称</th>
+				<th>购买数量</th>
+				<th>产品单价</th>
+				<th>产品总价</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in cart">
+				<td ng-bind="item.id"></td>
+				<td ng-bind="item.name"></td>
+				<td >
+					<button type="button" class="btn btn-primary" ng-click="reduce(item.id)">-</button>
+					<input type="number" ng-model="item.quantity">
+					<button type="button" class="btn btn-primary" ng-click="add(item.id)">+</button>
+				</td>
+				<td ng-bind="item.price"></td>
+				<td ng-bind="item.quantity*item.price"></td>
+				<td><button type="button" class="btn btn-warning" ng-click="remove(item.id)">移除</button></td>
+			</tr>
+			<tr>
+				<td>购物车商品的总价</td>
+				<td ng-bind="totalPrice()"></td>
+				<td>购物车商品总数量</td>
+				<td ng-bind="totalQuantity()"></td>
+				<td colspan="2"><button type="button" class="btn btn-danger" ng-click="cart={};">清空购物车</button></td>
+			</tr>
+		</tbody>
+	</table>
+	<h3 ng-show="cart.length<=0">请选择所您需购买的商品！</h3>
+</div>
+
+<script type="text/javascript" src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<script type="text/javascript" src="shoppingCart.js"></script>	
+</body>
+</html>

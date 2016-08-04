@@ -15,6 +15,9 @@
 		background-color: black;		
 		color: white;
 	}
+	.c2 h1{
+		font-size: 50px;
+	}
 	.clock h1{
 		margin: 20px;
 	}
@@ -22,6 +25,8 @@
 	<script type="text/javascript">
 	window.onload = function(){
 		var oClock = document.getElementById('clock');
+		var oClock2 = document.getElementById('clock2');
+		var oClock3 = document.getElementById('clock3');
 		function addZ(num){
 			return num<10?'0'+num:''+num;
 		}
@@ -35,12 +40,43 @@
 			var second = date.getSeconds();			
 			oClock.innerHTML = '<h1>'+year+'年'+addZ(month)+'月'+addZ(today)+'日</h1><p>'+addZ(hour)+'时'+addZ(minute)+'分'+addZ(second)+'秒</p>';
 		}
+		function clock2(){
+			var date    = new Date(),
+				yearEnd = date.getFullYear()+1;
+				endDate = new Date(yearEnd,0,0),
+				num	    = endDate.getTime() - date.getTime(),
+				day   = Math.ceil(num/(24*60*60*1000));//24*60*60*1000
+
+			oClock2.innerHTML = '<h1>距今年底只有：'+day+'天</h1>';
+		}
+		function clock3(){
+			var date     = new Date(),
+			    oldYear  = date.getFullYear(),
+			    oldMonth = date.getMonth(),
+				end      = oldMonth+1,
+				endDate  = new Date(oldYear,end),			
+				num	     = (endDate.getTime() - date.getTime())/1000,
+				day    	 = parseInt(num/(24*60*60)),
+				hour     = parseInt((num/60*60)%24),
+				minute   = parseInt((num/60)%60),
+				second   = parseInt(num%60);
+			oClock3.innerHTML = '<h1>距抢购结束还有：</h1><p>'+day+'天'+addZ(hour)+'小时'+addZ(minute)+'分'+addZ(second)+'秒</p>';
+		}		
 		setInterval(clock,1000);
+		setInterval(clock2,1000*60*60*23);
+		setInterval(clock3,1000);		
 		clock();
+		clock2();
+		clock3();
 	}
 	</script>
 </head>
 <body>
+	<h2>当前时间</h2>
 	<div id="clock" class="clock"></div>
+	<h2>年底倒计时</h2>
+	<div id="clock2" class="clock c2"></div>
+	<h2>抢购倒计时</h2>	
+	<div id="clock3" class="clock"></div>	
 </body>
 </html>

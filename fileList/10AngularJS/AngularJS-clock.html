@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AngularJS时钟</title>
+	<style type="text/css">
+	.clock{
+		width: 500px;
+		height: 160px;
+		margin: 20px auto;
+		text-align: center;		
+		font: 18px 'Microsoft Yahei';
+		border:1px solid #ccc;
+		background-color: black;		
+		color: white;
+	}
+	.clock p{
+		padding-top: 10px;
+	}
+	</style>
+</head>
+<body ng-app="myApp">
+	<div id="clock" class="clock" ng-controller="myCtrl" >
+		<h2>当前时间</h2>
+		<p ng-bind="date | date:'yyyy年MM月dd日hh点mm分ss秒'"></p>
+	</div>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	<script type="text/javascript">
+	var app = angular.module("myApp",[]);
+		app.controller("myCtrl",function($scope){
+			$scope.date = new Date();
+			setInterval(function(){
+				$scope.$apply(function(){
+					$scope.date = new Date();
+				});
+			},1000);
+		});	
+	</script>	
+</body>
+</html>
